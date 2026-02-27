@@ -1,0 +1,279 @@
+/* ===============================
+   GLOBAL RESET
+=================================*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: #f4f7fb;
+  color: #333;
+}
+
+/* ===============================
+   NAVBAR (WHITE THEME)
+=================================*/
+.navbar-main {
+  background: #ffffff;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.navbar-main .logo {
+  font-weight: bold;
+  font-size: 22px;
+  color: #0072ff;
+  cursor: pointer;
+}
+
+.nav-links span {
+  margin-left: 20px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.nav-links span:hover {
+  color: #0072ff;
+}
+
+.nav-links button {
+  margin-left: 20px;
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: none;
+  background: linear-gradient(45deg,#00c6ff,#0072ff);
+  color: white;
+  cursor: pointer;
+}
+
+/* ===============================
+   DASHBOARD LAYOUT
+=================================*/
+.dashboard-container {
+  padding: 40px;
+}
+
+.dashboard-title {
+  font-size: 26px;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 25px;
+}
+
+/* ===============================
+   DASHBOARD CARD
+=================================*/
+.dashboard-card {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+  transition: 0.3s ease;
+}
+
+.dashboard-card h3 {
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.dashboard-card p {
+  font-size: 22px;
+  font-weight: bold;
+  color: #0072ff;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0,114,255,0.15);
+}
+
+/* ===============================
+   TABLE DESIGN
+=================================*/
+.table-container {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+  margin-top: 30px;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table thead {
+  background: #0072ff;
+  color: white;
+}
+
+table th, table td {
+  padding: 14px 12px;
+  text-align: left;
+}
+
+table th {
+  font-weight: 600;
+}
+
+table tbody tr {
+  border-bottom: 1px solid #eee;
+  transition: 0.3s;
+}
+
+table tbody tr:hover {
+  background: #f2f7ff;
+}
+
+/* ===============================
+   FORM DESIGN
+=================================*/
+.form-container {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+  margin-top: 30px;
+  max-width: 500px;
+}
+
+.form-container h3 {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  transition: 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #0072ff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0,114,255,0.1);
+}
+
+.form-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  background: linear-gradient(45deg,#00c6ff,#0072ff);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.form-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,114,255,0.3);
+}
+
+/* ===============================
+   LOGIN PAGE (WHITE STYLE)
+=================================*/
+.login-page {
+  min-height: 100vh;
+  background: #f4f7fb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-box {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  width: 350px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.login-box h2 {
+  margin-bottom: 20px;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin: 12px 0;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 25px;
+  border: none;
+  background: linear-gradient(45deg,#00c6ff,#0072ff);
+  color: white;
+  cursor: pointer;
+}
+
+/* ===============================
+   RESPONSIVE
+=================================*/
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 20px;
+  }
+
+  .navbar-main {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .login-box {
+    width: 90%;
+  }
+}
+.admin-tabs {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.admin-tabs button {
+  padding: 10px 25px;
+  border-radius: 25px;
+  border: none;
+  background: #eaeaea;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.admin-tabs button.active {
+  background: linear-gradient(45deg,#00c6ff,#0072ff);
+  color: white;
+}

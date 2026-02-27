@@ -1,0 +1,168 @@
+/* ============================= */
+/* AUTH LOGIN / REGISTER STYLES  */
+/* ============================= */
+
+.auth-container,
+.login-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f4f7fb;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Main Box */
+.auth-box,
+.login-box {
+  width: 380px;
+  padding: 45px;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.auth-box:hover,
+.login-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 25px 50px rgba(0, 114, 255, 0.15);
+}
+
+/* Titles */
+.auth-box h2,
+.login-box h2 {
+  margin-bottom: 25px;
+  font-size: 26px;
+  font-weight: 600;
+  color: #0072ff;
+}
+
+/* Inputs */
+.auth-box input,
+.login-box input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #f9fbff;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.auth-box input:focus,
+.login-box input:focus {
+  border-color: #0072ff;
+  background: #ffffff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0,114,255,0.1);
+}
+
+/* Buttons */
+.auth-box button,
+.login-box button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.auth-box button:hover,
+.login-box button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,114,255,0.3);
+}
+
+/* Back Button */
+.auth-box .back-btn,
+.login-box .back-btn {
+  background: #f1f5ff;
+  color: #0072ff;
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+.auth-box .back-btn:hover,
+.login-box .back-btn:hover {
+  background: #e0ebff;
+}
+
+/* ============================= */
+/* ROLE SELECTION PAGE */
+/* ============================= */
+
+.role-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.role-card {
+  flex: 1;
+  min-width: 120px;
+  padding: 20px;
+  border-radius: 15px;
+  background: #ffffff;
+  border: 2px solid #eaeaea;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-weight: 500;
+}
+
+.role-card:hover {
+  border-color: #0072ff;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,114,255,0.15);
+}
+
+.role-card.active {
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: #fff;
+  border: none;
+}
+
+/* Continue Button */
+.continue-btn {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.continue-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,114,255,0.3);
+}
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 480px) {
+  .auth-box,
+  .login-box {
+    width: 90%;
+    padding: 30px;
+  }
+
+  .role-container {
+    flex-direction: column;
+  }
+}
