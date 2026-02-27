@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/attendance/static/css/main.90ddca5b.css",
+    "main.js": "/attendance/static/js/main.70694c7a.js",
+    "index.html": "/attendance/index.html",
+    "main.90ddca5b.css.map": "/attendance/static/css/main.90ddca5b.css.map",
+    "main.70694c7a.js.map": "/attendance/static/js/main.70694c7a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.90ddca5b.css",
+    "static/js/main.70694c7a.js"
+  ]
+}
