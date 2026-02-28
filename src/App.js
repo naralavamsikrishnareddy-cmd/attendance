@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 // Styles
 import "./styles/App.css";
@@ -33,18 +33,17 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
-    <Router>
-
+    <HashRouter>
       <Routes>
 
-        {/* ================= PUBLIC ROUTES ================= */}
+        {/* PUBLIC ROUTES */}
         <Route path="/" element={<Home />} />
         <Route path="/role-select" element={<RoleSelect />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/resources" element={<Resources />} />
 
-        {/* ================= ADMIN ================= */}
+        {/* ADMIN */}
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route
           path="/admin/dashboard"
@@ -55,7 +54,7 @@ function App() {
           }
         />
 
-        {/* ================= FACULTY ================= */}
+        {/* FACULTY */}
         <Route path="/faculty/register" element={<FacultyRegister />} />
         <Route path="/faculty/login" element={<FacultyLogin />} />
         <Route
@@ -67,7 +66,7 @@ function App() {
           }
         />
 
-        {/* ================= STUDENT ================= */}
+        {/* STUDENT */}
         <Route path="/student/login" element={<StudentLogin />} />
         <Route
           path="/student/dashboard"
@@ -87,7 +86,7 @@ function App() {
         />
 
       </Routes>
-    </Router>
+    </HashRouter>
   );
 }
 
