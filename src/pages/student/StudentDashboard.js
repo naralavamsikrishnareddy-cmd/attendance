@@ -6,12 +6,11 @@ function StudentDashboard() {
   const navigate = useNavigate();
   const [currentStudent, setCurrentStudent] = useState(null);
 
-  // ================= CHECK LOGIN =================
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("currentUser"));
 
     if (!user || user.role !== "student") {
-      navigate("/student/login"); // ⚠ make sure this matches App.js route
+      navigate("/student/login");
       return;
     }
 
@@ -30,7 +29,6 @@ function StudentDashboard() {
     setCurrentStudent(foundStudent);
   }, [navigate]);
 
-  // ================= LOGOUT =================
   const handleLogout = () => {
     localStorage.removeItem("currentUser");
     navigate("/");
@@ -43,13 +41,13 @@ function StudentDashboard() {
   let overallTotal = 0;
   let overallPresent = 0;
 
-  const courseRows = Object.keys(attendance).map((course) => {
-    const total = attendance[course].total;
-    const present = attendance[course].present;
+  const courseRows = currentStudent.courses?.map((course) => {
+    const data = attendance[course] || { total: 0, present: 0 };
+
+    const total = data.total;
+    const present = data.present;
     const percentage =
-      total === 0
-        ? 0
-        : ((present / total) * 100).toFixed(2);
+      total === 0 ? 0 : ((present / total) * 100).toFixed(2);
 
     overallTotal += total;
     overallPresent += present;
@@ -71,10 +69,7 @@ function StudentDashboard() {
 
   return (
     <>
-      <Navbar
-        title="Student Dashboard"
-        onLogout={handleLogout}
-      />
+      <Navbar title="Student Dashboard" onLogout={handleLogout} />
 
       <div className="dashboard">
 
@@ -82,32 +77,20 @@ function StudentDashboard() {
           <h3>Student Info</h3>
           <p><strong>Roll:</strong> {currentStudent.roll}</p>
           <p><strong>Name:</strong> {currentStudent.name}</p>
-          <p><strong>Course:</strong> {currentStudent.course}</p>
-
-          {/* ✅ Change Password Button inside card */}
-          <button
-            style={{ marginTop: "10px" }}
-            onClick={() =>
-              navigate("/student/change-password")
-            }
-          >
-            Change Password
-          </button>
+          <p><strong>Courses:</strong> {currentStudent.courses?.join(", ")}</p>
         </div>
 
         <div className="card">
-          <h3>Attendance Details</h3>
-
+          <h3>Course-wise Attendance</h3>
           <table>
             <thead>
               <tr>
                 <th>Course</th>
-                <th>Total Classes</th>
+                <th>Total</th>
                 <th>Present</th>
-                <th>Percentage</th>
+                <th>%</th>
               </tr>
             </thead>
-
             <tbody>
               {courseRows.length > 0 ? (
                 courseRows
@@ -122,24 +105,9 @@ function StudentDashboard() {
 
         <div className="card">
           <h3>Overall Attendance</h3>
-
-          <table>
-            <thead>
-              <tr>
-                <th>Total Classes</th>
-                <th>Present</th>
-                <th>Overall %</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td>{overallTotal}</td>
-                <td>{overallPresent}</td>
-                <td>{overallPercentage}%</td>
-              </tr>
-            </tbody>
-          </table>
+          <p>Total Classes: {overallTotal}</p>
+          <p>Present: {overallPresent}</p>
+          <p>Overall Percentage: {overallPercentage}%</p>
         </div>
 
       </div>
