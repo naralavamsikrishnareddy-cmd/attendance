@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/layout/Navbar";
+import "./student.css"; // make sure CSS is imported
 
 function StudentDashboard() {
   const navigate = useNavigate();
@@ -73,6 +74,7 @@ function StudentDashboard() {
 
       <div className="dashboard">
 
+        {/* STUDENT INFO */}
         <div className="card">
           <h3>Student Info</h3>
           <p><strong>Roll:</strong> {currentStudent.roll}</p>
@@ -80,9 +82,12 @@ function StudentDashboard() {
           <p><strong>Courses:</strong> {currentStudent.courses?.join(", ")}</p>
         </div>
 
+        {/* COURSE ATTENDANCE TABLE */}
         <div className="card">
           <h3>Course-wise Attendance</h3>
-          <table>
+
+          {/* ✅ Only one correct table */}
+          <table className="dashboard-table">
             <thead>
               <tr>
                 <th>Course</th>
@@ -91,8 +96,9 @@ function StudentDashboard() {
                 <th>%</th>
               </tr>
             </thead>
+
             <tbody>
-              {courseRows.length > 0 ? (
+              {courseRows && courseRows.length > 0 ? (
                 courseRows
               ) : (
                 <tr>
@@ -103,6 +109,7 @@ function StudentDashboard() {
           </table>
         </div>
 
+        {/* OVERALL */}
         <div className="card">
           <h3>Overall Attendance</h3>
           <p>Total Classes: {overallTotal}</p>

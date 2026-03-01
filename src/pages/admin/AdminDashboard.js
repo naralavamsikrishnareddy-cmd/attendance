@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/layout/Navbar";
+import "./admin.css";
 
 function AdminDashboard() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("courses");
 
-  // ================= PROTECT DASHBOARD =================
+  // ================= PROTECT =================
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("currentUser"));
     if (!user || user.role !== "admin") {
@@ -14,7 +15,6 @@ function AdminDashboard() {
     }
   }, [navigate]);
 
-  // ================= LOGOUT =================
   const handleLogout = () => {
     localStorage.removeItem("currentUser");
     navigate("/");
@@ -36,7 +36,7 @@ function AdminDashboard() {
   const [facultyCourse, setFacultyCourse] = useState("");
   const [facultyEditId, setFacultyEditId] = useState(null);
 
-  // ================= LOAD DATA =================
+  // ================= LOAD =================
   useEffect(() => {
     setCourses(JSON.parse(localStorage.getItem("courses")) || []);
     setStudents(JSON.parse(localStorage.getItem("students")) || []);
@@ -55,7 +55,6 @@ function AdminDashboard() {
   // ================= COURSE =================
   const addCourse = () => {
     if (!courseName) return;
-
     const updated = [...courses, courseName];
     setCourses(updated);
     saveCourses(updated);
@@ -72,16 +71,12 @@ function AdminDashboard() {
   const addOrUpdateStudent = () => {
     if (!roll || !name || selectedCourses.length === 0) return;
 
-    const username = roll;
-    const password = roll + "@123";
-
     if (editId) {
       const updated = students.map((s) =>
         s.id === editId
           ? { ...s, roll, name, courses: selectedCourses }
           : s
       );
-
       setStudents(updated);
       saveStudents(updated);
       setEditId(null);
@@ -91,30 +86,16 @@ function AdminDashboard() {
         roll,
         name,
         courses: selectedCourses,
-        username,
-        password,
         attendance: {},
       };
-
       const updated = [...students, newStudent];
       setStudents(updated);
       saveStudents(updated);
-
-      alert(
-        `Student Created!\nUsername: ${username}\nPassword: ${password}`
-      );
     }
 
     setRoll("");
     setName("");
     setSelectedCourses([]);
-  };
-
-  const editStudent = (student) => {
-    setRoll(student.roll);
-    setName(student.name);
-    setSelectedCourses(student.courses || []);
-    setEditId(student.id);
   };
 
   const deleteStudent = (id) => {
@@ -133,7 +114,6 @@ function AdminDashboard() {
           ? { ...f, name: facultyName, course: facultyCourse }
           : f
       );
-
       setFaculties(updated);
       saveFaculties(updated);
       setFacultyEditId(null);
@@ -143,7 +123,6 @@ function AdminDashboard() {
         name: facultyName,
         course: facultyCourse,
       };
-
       const updated = [...faculties, newFaculty];
       setFaculties(updated);
       saveFaculties(updated);
@@ -165,19 +144,64 @@ function AdminDashboard() {
 
       <div className="dashboard-container">
 
+        {/* TABS */}
         <div className="admin-tabs">
           <button onClick={() => setActiveTab("courses")}>Courses</button>
           <button onClick={() => setActiveTab("students")}>Students</button>
           <button onClick={() => setActiveTab("faculty")}>Faculty</button>
         </div>
 
-        {/* STUDENTS */}
+        {/* ================= COURSES ================= */}
+        {activeTab === "courses" && (
+          <div className="card">
+            <h3>Add Course</h3>
+
+            <input
+              value={courseName}
+              onChange={(e) => setCourseName(e.target.value)}
+              placeholder="Course Name"
+            />
+            <button onClick={addCourse}>Add</button>
+
+            <table className="admin-table">
+              <thead>
+                <tr>
+                  <th>Course Name</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {courses.map((course, index) => (
+                  <tr key={index}>
+                    <td>{course}</td>
+                    <td>
+                      <button onClick={() => deleteCourse(course)}>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {/* ================= STUDENTS ================= */}
         {activeTab === "students" && (
           <div className="card">
-            <h3>{editId ? "Update Student" : "Add Student"}</h3>
+            <h3>Add Student</h3>
 
-            <input value={roll} onChange={(e) => setRoll(e.target.value)} placeholder="Roll No" />
-            <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Student Name" />
+            <input
+              value={roll}
+              onChange={(e) => setRoll(e.target.value)}
+              placeholder="Roll No"
+            />
+
+            <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Student Name"
+            />
 
             <select
               multiple
@@ -189,7 +213,9 @@ function AdminDashboard() {
               }
             >
               {courses.map((course, index) => (
-                <option key={index} value={course}>{course}</option>
+                <option key={index} value={course}>
+                  {course}
+                </option>
               ))}
             </select>
 
@@ -197,7 +223,7 @@ function AdminDashboard() {
               {editId ? "Update" : "Add"}
             </button>
 
-            <table>
+            <table className="admin-table">
               <thead>
                 <tr>
                   <th>Roll</th>
@@ -213,8 +239,61 @@ function AdminDashboard() {
                     <td>{s.name}</td>
                     <td>{s.courses?.join(", ")}</td>
                     <td>
-                      <button onClick={() => editStudent(s)}>Edit</button>
-                      <button onClick={() => deleteStudent(s.id)}>Delete</button>
+                      <button onClick={() => deleteStudent(s.id)}>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {/* ================= FACULTY ================= */}
+        {activeTab === "faculty" && (
+          <div className="card">
+            <h3>Add Faculty</h3>
+
+            <input
+              value={facultyName}
+              onChange={(e) => setFacultyName(e.target.value)}
+              placeholder="Faculty Name"
+            />
+
+            <select
+              value={facultyCourse}
+              onChange={(e) => setFacultyCourse(e.target.value)}
+            >
+              <option value="">Select Course</option>
+              {courses.map((course, index) => (
+                <option key={index} value={course}>
+                  {course}
+                </option>
+              ))}
+            </select>
+
+            <button onClick={addOrUpdateFaculty}>
+              {facultyEditId ? "Update" : "Add"}
+            </button>
+
+            <table className="admin-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Course</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {faculties.map((f) => (
+                  <tr key={f.id}>
+                    <td>{f.name}</td>
+                    <td>{f.course}</td>
+                    <td>
+                      <button onClick={() => deleteFaculty(f.id)}>
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))}

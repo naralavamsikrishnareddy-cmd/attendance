@@ -99,7 +99,7 @@ body {
 }
 
 /* ===============================
-   TABLE DESIGN
+   TABLE CONTAINER
 =================================*/
 .table-container {
   background: white;
@@ -110,32 +110,62 @@ body {
   overflow-x: auto;
 }
 
-table {
+/* ===============================
+   UNIVERSAL DASHBOARD TABLE
+=================================*/
+.dashboard-table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 20px;
 }
 
-table thead {
-  background: #0072ff;
+.dashboard-table th,
+.dashboard-table td {
+  border: 2px solid black;
+  padding: 10px;
+  text-align: center;
+}
+
+.dashboard-table th {
+  background-color: #2c3e50;
   color: white;
 }
 
-table th, table td {
-  padding: 14px 12px;
-  text-align: left;
+.dashboard-table tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 
-table th {
-  font-weight: 600;
+.dashboard-table tr:hover {
+  background-color: #ddd;
 }
 
-table tbody tr {
-  border-bottom: 1px solid #eee;
-  transition: 0.3s;
+/* ===============================
+   TABLE BUTTONS
+=================================*/
+.table-btn {
+  padding: 5px 10px;
+  margin: 3px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
-table tbody tr:hover {
-  background: #f2f7ff;
+.edit-btn {
+  background-color: #3498db;
+  color: white;
+}
+
+.delete-btn {
+  background-color: red;
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #2980b9;
+}
+
+.delete-btn:hover {
+  background-color: darkred;
 }
 
 /* ===============================
@@ -200,7 +230,7 @@ table tbody tr:hover {
 }
 
 /* ===============================
-   LOGIN PAGE (WHITE STYLE)
+   LOGIN PAGE
 =================================*/
 .login-page {
   min-height: 100vh;
@@ -242,22 +272,8 @@ table tbody tr:hover {
 }
 
 /* ===============================
-   RESPONSIVE
+   ADMIN TABS
 =================================*/
-@media (max-width: 768px) {
-  .dashboard-container {
-    padding: 20px;
-  }
-
-  .navbar-main {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .login-box {
-    width: 90%;
-  }
-}
 .admin-tabs {
   display: flex;
   gap: 15px;
@@ -276,4 +292,22 @@ table tbody tr:hover {
 .admin-tabs button.active {
   background: linear-gradient(45deg,#00c6ff,#0072ff);
   color: white;
+}
+
+/* ===============================
+   RESPONSIVE
+=================================*/
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 20px;
+  }
+
+  .navbar-main {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .login-box {
+    width: 90%;
+  }
 }

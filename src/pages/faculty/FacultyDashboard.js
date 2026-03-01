@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/layout/Navbar";
+import "./faculty.css"; // make sure CSS is imported
 
 function FacultyDashboard() {
   const navigate = useNavigate();
@@ -85,7 +86,8 @@ function FacultyDashboard() {
         <div className="card">
           <h3>Mark Attendance</h3>
 
-          <table>
+          {/* ✅ ONLY ONE TABLE */}
+          <table className="dashboard-table">
             <thead>
               <tr>
                 <th>Roll No</th>
@@ -97,10 +99,10 @@ function FacultyDashboard() {
 
             <tbody>
               {students
-  .filter(
-    (student) =>
-      student.courses?.includes(facultyCourse)
-  )
+                .filter(
+                  (student) =>
+                    student.courses?.includes(facultyCourse)
+                )
                 .map((student) => {
 
                   const courseData =
@@ -113,10 +115,7 @@ function FacultyDashboard() {
                       <td>
                         <button
                           onClick={() =>
-                            markAttendance(
-                              student.id,
-                              "Present"
-                            )
+                            markAttendance(student.id, "Present")
                           }
                         >
                           Present
@@ -124,10 +123,7 @@ function FacultyDashboard() {
 
                         <button
                           onClick={() =>
-                            markAttendance(
-                              student.id,
-                              "Absent"
-                            )
+                            markAttendance(student.id, "Absent")
                           }
                         >
                           Absent
