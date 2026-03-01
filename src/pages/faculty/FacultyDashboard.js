@@ -97,10 +97,10 @@ function FacultyDashboard() {
 
             <tbody>
               {students
-                .filter(
-                  (student) =>
-                    student.course === facultyCourse
-                )
+  .filter(
+    (student) =>
+      student.courses?.includes(facultyCourse)
+  )
                 .map((student) => {
 
                   const courseData =
